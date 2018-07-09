@@ -1,0 +1,15 @@
+{
+    "protocol": "http",
+    "host": "api.worldweatheronline.com",
+    "base_path": "/premium/v1",
+    "default_params": {
+        "key": "82506d6a5f17421285b90655180607",
+        "format": "json"
+    },
+    "api": {
+        "marine": {
+            "method": "GET",
+            "path": "/marine.ashx"
+        }
+    }
+}
