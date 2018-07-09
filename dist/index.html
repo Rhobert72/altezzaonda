@@ -14,21 +14,26 @@
 </head>
 
 <body>
-    <div id="player"></div>
     taaac!
 </body>
 <script src="/altezzaonda.c5c65d1e.js"></script>
 
 <script>
 
-    worldweatheronlineService.getMarineForecast(
-    {
-        lat: 42.925634,
-        lon: 10.525889
-    }
-).then(response => {
-    console.log(response);
+
+altezzaondaService.setMarineForecast({
+    slug: 'rimini',
+    forecast: 'ciao'
 });
+
+    altezzaondaService
+        .getMarineForecast({
+            lat: 42.925634,
+            lon: 10.525889
+        })
+        .then(response => {
+            console.log(response);
+        });
 
 </script>
 
