@@ -1,4 +1,4 @@
-const SeaState = function (config) {
+const SeaStateService = function (config) {
     return {
         getState(height = 0, measure = 'm') {
             return config.states.find( state => {
