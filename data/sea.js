@@ -47,9 +47,10 @@ const notmatched = [ 'Mar Ligure',
 'Friuli-Venezia Giulia' ];
 
 const data = fs.readFileSync(`${__dirname}/wiki.html`);
+const content = data.toString();
+
 const comuni = JSON.parse(fs.readFileSync(`${__dirname}/comuni.json`));
 const comuniSulMarePath = `${__dirname}/comuni-sul-mare.json`;
-const content = data.toString();
 
 let m;
 const matches = [];

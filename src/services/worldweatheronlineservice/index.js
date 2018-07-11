@@ -3,12 +3,22 @@ const WorldweatheronlineService = function(httpService, config) {
     this.baseURL = `${config.protocol}://${config.host}${config.base_path}`;
 
     this.getMarineForecast = params => {
-       const apiParams = {
-           params: {
-            q: `${params.lat},${params.lon}`
-           }        
-        };
-        return this.call(Object.assign(apiParams, config.api.marine));
+        
+        if(config.mocked){
+            console.warn('getMarineForecast is mocked');
+            return new Promise( (resolve, reject) => {
+                return resolve(config.mocks.marine)
+            });
+        }
+        else {
+            const apiParams = {
+                params: {
+                 q: `${params.lat},${params.lon}`
+                }        
+             };
+             return this.call(Object.assign(apiParams, config.api.marine));
+        }
+        
     };
 
     this.call = params => {

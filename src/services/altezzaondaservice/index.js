@@ -11,8 +11,14 @@ const AltezzaondaService = function(database, forecastService, config) {
                 console.log(response);
                 if(response.status === 200) {
                     if(response.data.data.weather) {
+                        //const databaseRef = database.ref(`${config.collections.marine.name}/${data.slug}`);
+                        const databaseRef = database.ref(`${config.collections.marine.name}/${data.slug}`);
+                        let newForecastRef;
                         response.data.data.weather.forEach( forecast => {
-                            database.ref(`marine/${data.slug}`).child(forecast.date).set(forecast);
+                            //console.log(forecast);
+                            newForecastRef = databaseRef.push();
+                            newForecastRef.set(forecast);
+                            //database.ref(`${config.collections.marine.name}/${data.slug}`).child().set(forecast);
                         });
                         return response.data.data.weather;
                     }
@@ -23,33 +29,41 @@ const AltezzaondaService = function(database, forecastService, config) {
                 }
             });
 
-
-
-
-        this.getMarineForecast({
-            lat: data.lat,
-            lon: data.lon
-        })
-        .then( forecasts => {
-            //console.log('forecast', forecast);
-
-            forecasts.forEach( forecast => {
-                database.ref(`marine/${data.slug}`).child(forecast.date).set(forecast);
-            });
-
-            
-        });
     };
 
 
     this.getMarineForecast = params => {
 
+        return database.ref(`${config.collections.marine.name}/${params.slug}`)
+        
+        .orderByChild("date")
+        .startAt('2018-07-17')
+        .once('value')
+        .then( snapshot => {
+            //console.log(Object.keys(snapshot.val()).length)
+            if(snapshot.val()){
+                return snapshot.val();
+            }
+            else {
+                return this.loadMarineForecast(params)
+                .then( response => {
+                    if(response) {
+                        return this.getMarineForecast(params);
+                    }
+                    else {
+                        return;
+                    }
+                });
+            }
+            
+        });
+
         return database
-            .ref(`marine/${params.slug}`)
+            .ref(`${config.collections.marine.name}/${params.slug}`)
             .once('value')
             .then( snapshot => {
-                
-                if(snapshot.val()){
+                //console.log(Object.keys(snapshot.val()).length)
+                if(snapshot.val() && Object.keys(snapshot.val()).length >= config.collections.marine.min_forecasts){
                     return snapshot.val();
                 }
                 else {

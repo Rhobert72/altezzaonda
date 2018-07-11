@@ -1,1 +1,8 @@
-{}
+{
+    "collections": {
+        "marine": {
+            "name": "marine",
+            "min_forecasts": 3
+        }
+    }
+}
