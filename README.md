@@ -1,23 +1,23 @@
-#ALTEZZAONDA
+# ALTEZZAONDA
 
-##Routing
+## Routing
 
-###Reegion
+### Region
 /:region
 
 Esempio: /sicilia/palermo
 
-###Province
+### Province
 /:region/:province
 
 Esempio: /sicilia/palermo
 
-###City
+### City
 /:region/:province/:city
 
 Esempio: /sicilia/palermo/palermo
 
-###Near by
+### Near by
 /vicino-a-te
 
 Esempio: /vicino-a-te
