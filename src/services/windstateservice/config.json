@@ -1,0 +1,289 @@
+{
+    "states": [
+        {
+            "number": 0,
+            "label": {
+                "it": "calmo",
+                "en": "calm"
+            },
+            "speed": {
+                "kn": {
+                    "min": 0,
+                    "max":0
+                },
+                "km/h": {
+                    "min": 0,
+                    "max":0
+                },
+                "m/s": {
+                    "min": 0,
+                    "max":0
+                }
+            }
+        },
+
+        {
+            "number": 1,
+            "label": {
+                "it": "bava di vento",
+                "en": "light air"
+            },
+            "speed": {
+                "kn": {
+                    "min": 1,
+                    "max": 3
+                },
+                "km/h": {
+                    "min": 1,
+                    "max": 6
+                },
+                "m/s": {
+                    "min": 0.01,
+                    "max": 1.50
+                }
+            }
+        },
+
+        {
+            "number": 2,
+            "label": {
+                "it": "brezza leggera",
+                "en": "light breeze"
+            },
+            "speed": {
+                "kn": {
+                    "min": 4,
+                    "max": 6
+                },
+                "km/h": {
+                    "min": 7,
+                    "max": 11
+                },
+                "m/s": {
+                    "min": 1.51,
+                    "max": 3.40
+                }
+            }
+        },
+
+        {
+            "number": 3,
+            "label": {
+                "it": "brezza tesa",
+                "en": "gentle breeze"
+            },
+            "speed": {
+                "kn": {
+                    "min": 7,
+                    "max": 10
+                },
+                "km/h": {
+                    "min": 12,
+                    "max": 19
+                },
+                "m/s": {
+                    "min": 3.41,
+                    "max": 5.40
+                }
+            }
+        },
+
+        {
+            "number": 4,
+            "label": {
+                "it": "vento moderato",
+                "en": "moderate breeze"
+            },
+            "speed": {
+                "kn": {
+                    "min": 11,
+                    "max": 16
+                },
+                "km/h": {
+                    "min": 20,
+                    "max": 29
+                },
+                "m/s": {
+                    "min": 5.41,
+                    "max": 7.90
+                }
+            }
+        },
+
+        {
+            "number": 5,
+            "label": {
+                "it": "vento teso",
+                "en": "fresh breeze"
+            },
+            "speed": {
+                "kn": {
+                    "min": 17,
+                    "max": 21
+                },
+                "km/h": {
+                    "min": 30,
+                    "max": 39
+                },
+                "m/s": {
+                    "min": 7.91,
+                    "max": 10.70
+                }
+            }
+        },
+
+        {
+            "number": 6,
+            "label": {
+                "it": "vento fresco",
+                "en": "strong breeze"
+            },
+            "speed": {
+                "kn": {
+                    "min": 22,
+                    "max": 27
+                },
+                "km/h": {
+                    "min": 40,
+                    "max": 50
+                },
+                "m/s": {
+                    "min": 10.71,
+                    "max": 13.80
+                }
+            }
+        },
+
+        {
+            "number": 7,
+            "label": {
+                "it": "vento forte",
+                "en": "near gale"
+            },
+            "speed": {
+                "kn": {
+                    "min": 28,
+                    "max": 33
+                },
+                "km/h": {
+                    "min": 51,
+                    "max": 62
+                },
+                "m/s": {
+                    "min": 13.81,
+                    "max": 17.10
+                }
+            }
+        },
+
+        {
+            "number": 8,
+            "label": {
+                "it": "burrasca",
+                "en": "gale"
+            },
+            "speed": {
+                "kn": {
+                    "min": 34,
+                    "max": 40
+                },
+                "km/h": {
+                    "min": 63,
+                    "max": 75
+                },
+                "m/s": {
+                    "min": 17.11,
+                    "max": 20.70
+                }
+            }
+        },
+
+        {
+            "number": 9,
+            "label": {
+                "it": "burrasca forte",
+                "en": "strong gale"
+            },
+            "speed": {
+                "kn": {
+                    "min": 41,
+                    "max": 47
+                },
+                "km/h": {
+                    "min": 76,
+                    "max": 87
+                },
+                "m/s": {
+                    "min": 20.71,
+                    "max": 24.40
+                }
+            }
+        },
+
+        {
+            "number": 10,
+            "label": {
+                "it": "tempesta",
+                "en": "storm"
+            },
+            "speed": {
+                "kn": {
+                    "min": 48,
+                    "max": 55
+                },
+                "km/h": {
+                    "min": 88,
+                    "max": 102
+                },
+                "m/s": {
+                    "min": 24.41,
+                    "max": 28.40
+                }
+            }
+        },
+
+        {
+            "number": 11,
+            "label": {
+                "it": "tempesta violenta",
+                "en": "violent storm"
+            },
+            "speed": {
+                "kn": {
+                    "min": 56,
+                    "max": 63
+                },
+                "km/h": {
+                    "min": 103,
+                    "max": 117
+                },
+                "m/s": {
+                    "min": 28.41,
+                    "max": 32.60
+                }
+            }
+        },
+
+        {
+            "number": 12,
+            "label": {
+                "it": "uragano",
+                "en": "hurricane"
+            },
+            "speed": {
+                "kn": {
+                    "min": 64,
+                    "max": 100000
+                },
+                "km/h": {
+                    "min": 118,
+                    "max": 100000
+                },
+                "m/s": {
+                    "min": 32.61,
+                    "max": 100000
+                }
+            }
+        }
+    ]
+}
