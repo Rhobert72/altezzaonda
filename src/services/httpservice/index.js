@@ -16,7 +16,7 @@ const HttpService = function(helpers, config) {
             request.url += (request.url.indexOf('?') === -1? '?':'&')+helpers.toURLParams(options.params);
           }
         
-          request.method = options.method || conf.method;
+          request.method = options.method || conf.defaults.method;
 
           request.headers = options.headers || {};
           

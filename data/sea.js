@@ -1,4 +1,5 @@
 const fs = require('fs');
+const functions = require('./functions');
 
 const regex = /title="(.*)">\1<\/a>/gm;
 const notmatched = [ 'Mar Ligure',
@@ -50,6 +51,8 @@ const data = fs.readFileSync(`${__dirname}/wiki.html`);
 const content = data.toString();
 
 const comuni = JSON.parse(fs.readFileSync(`${__dirname}/comuni.json`));
+const province = JSON.parse(fs.readFileSync(`${__dirname}/province.json`));
+const regioni = JSON.parse(fs.readFileSync(`${__dirname}/regioni.json`));
 const comuniSulMarePath = `${__dirname}/comuni-sul-mare.json`;
 
 let m;
@@ -81,9 +84,24 @@ matches.forEach(match => {
     comuni.forEach( comune => {
         if(comune.nome === match){
             matched = true;
+
+            comune.slug = functions.slugify(comune.nome);
+
             delete(comune.capoluogo_provincia);
             delete(comune.codice_catastale);
 
+            let p = province.find( provincia => {
+                return comune.id_provincia === provincia.id
+            });
+
+            let r = regioni.find( regione => {
+                return comune.id_regione === regione.id
+            });
+
+            comune.provincia = functions.slugify(p.nome);
+            comune.regione = functions.slugify(r.nome);
+            comune.previsioni = [];
+//console.log(comune);
             found.push(comune);
         }
     });
@@ -93,7 +111,7 @@ matches.forEach(match => {
         }         
     }
 });
-
+console.log(JSON.stringify(found[0]));
 fs.writeFile(comuniSulMarePath, JSON.stringify(found),  function(err) {
     if (err) {
        return console.error(`Errore scrittura file ${err}`);
