@@ -1,5 +1,5 @@
 const slugify = str => {
-    console.log(str);
+    //console.log(str);
     return str
         .replace(/ /g,'-')
         .replace(/ò/g,'o')

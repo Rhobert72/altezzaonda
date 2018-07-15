@@ -1,0 +1,22 @@
+altezzzaonda.it/vicino-a-me
+altezzaonda.it/:query
+
+const query = req.params.query.endsWith('/')? req.params.query.replace(/\/$/,''):req.params.query;
+const locations = query.split('/');
+
+if(locations.length > 0) {
+let field;
+let value;
+switch(locations.length){
+	case 1: field = 'regione/'; value = locations[0]; break;
+	case 2: field = 'provincia/'; value = locations[1]; break;
+	case 3: field = ''; value = locations[2]; break; // comune => no nested
+	default: break;
+}
+
+DatabaseReference root = database.getReference().child("marine");
+Query query = root.orderByChild(`${field}slug`).equalTo(value);
+}
+else {
+	res.status(404);
+}
