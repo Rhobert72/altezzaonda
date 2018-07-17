@@ -1,21 +1,6 @@
 const fs = require('fs');
 const functions = require('./functions');
 
-const firebase = require('firebase');
-firebase.initializeApp({
-    "apiKey": "AIzaSyDvtvvjNo0uff-u9krHwYDHva_zki-wSZY",
-    "authDomain": "altezzaonda.firebaseapp.com",
-    "databaseURL": "https://altezzaonda.firebaseio.com",
-    "projectId": "altezzaonda",
-    "storageBucket": "altezzaonda.appspot.com",
-    "messagingSenderId": "302223763442"
-  });
-const database = firebase.database();
-
-const databaseRef = database.ref('locations');
-
-databaseRef.remove();
-
 const regex = /title="(.*)">\1<\/a>/gm;
 const notmatched = ['Mar Ligure',
     'Francia',
@@ -63,7 +48,7 @@ const notmatched = ['Mar Ligure',
     'Friuli-Venezia Giulia'];
 
 const data = fs.readFileSync(`${__dirname}/wiki.html`);
-const content = data.toString();
+const content = data.toString().replace(/ \(italia\)/gi,'');
 
 const comuni = JSON.parse(fs.readFileSync(`${__dirname}/comuni.json`));
 const province = JSON.parse(fs.readFileSync(`${__dirname}/province.json`));
@@ -91,9 +76,6 @@ while ((m = regex.exec(content)) !== null) {
     });
 }
 
-//console.log(matches);
-//console.log(matches.length);
-//console.log(comuni);
 const found = [];
 const notfound = [];
 let matched;
@@ -132,8 +114,9 @@ matches.forEach(match => {
                 lat: comune.latitudine,
                 lon: comune.longitudine,
                 slug: functions.slugify(comune.nome),
+                path: [functions.slugify(r.nome),functions.slugify(p.nome),functions.slugify(comune.nome)].join('/'),
                 nation: {
-                    id: 1,
+                    id: "1",
                     name: 'italy',
                     slug: 'italy',
                     lang: 'it_it'
@@ -151,12 +134,8 @@ matches.forEach(match => {
                 forecasts: []
 
             };
-            
-            newForecastRef = databaseRef.push();
-            newForecastRef.set(record);
-
-
-            found.push(comune);
+        
+            found.push(record);
         }
     });
     if (!matched) {
