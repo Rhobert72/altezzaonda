@@ -1,4 +1,3 @@
-const fs = require('fs');
 const firebase = require('firebase');
 const geofire = require('geofire');
 
@@ -12,15 +11,44 @@ firebase.initializeApp({
     "messagingSenderId": "302223763442"
   });
 
-const locations = JSON.parse(fs.readFileSync(`${__dirname}/comuni-sul-mare.json`));
-
 const database = firebase.database();
 const locationsRef = database.ref('locations');
 const geofireLocationsRef = database.ref('geofire_locations');
 const geoFire = new geofire(geofireLocationsRef);
 
-locationsRef.remove();
+geofireLocationsRef.remove();
 
+locationsRef.once('value').then( snapshot => {
+    
+    if(snapshot.val()){
+
+        const locations = snapshot.val();
+
+        const promises = Object.keys(locations).map( locationKey => {
+            return geoFire
+                    .set(locationKey, [locations[locationKey].lat, locations[locationKey].lon])
+                    .catch(reason => process.exit(-1));
+        });
+
+        Promise
+            .all(promises)
+            .then( responses => {
+                console.log('Ok');
+                process.exit(0);
+            })
+            .catch( error => {
+                console.error(error);
+                process.exit(-1);
+            });
+    }
+    else {
+        console.error('No locations found in Firebase');
+        process.exit(-1);
+    }
+});
+
+
+/*
 const promises = locations.map( location => {
     newForecastRef = locationsRef.push();
     return newForecastRef
@@ -69,4 +97,6 @@ Promise
         console.log('Unhandled Rejection at:', reason.stack || reason)
         // Recommended: send the information to sentry.io
         // or whatever crash reporting service you use
-      })
+      });
+
+      */
